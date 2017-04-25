@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/aboutThisAppText"
+        android:layout_width="260dp"
+        android:layout_height="260dp"
+        android:text="@string/InfoText"
+        android:background="#ff000000"
+        android:textColor="@color/colorAccent"
+        android:paddingRight="16dp"
+        android:paddingLeft="16dp"
+        android:paddingTop="40dp"
+        android:paddingBottom="8dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/aboutThisAppHeadline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size_big"
+        android:layout_alignStart="@+id/aboutThisAppText"
+        android:layout_alignTop="@+id/aboutThisAppText"
+        android:padding="8dp"
+        android:text="@string/aboutText"
+        android:textColor="@color/colorAccent" />
+
+    <ImageButton
+        android:id="@+id/dismissDialogButton"
+        android:layout_width="wrap_content"
+        android:tint="@color/colorAccent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        app:srcCompat="@android:drawable/btn_dialog"
+        android:layout_alignBottom="@+id/aboutThisAppText"
+        android:layout_alignEnd="@+id/aboutThisAppText" />
+
+</RelativeLayout>
