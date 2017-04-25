@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(MainActivity.this,
-                        "This art object was created to change the meaning while playing with different letters", Toast.LENGTH_LONG).show();
+                        "Change the meaning of this art object while playing with different letters", Toast.LENGTH_LONG).show();
             }
         });
 
