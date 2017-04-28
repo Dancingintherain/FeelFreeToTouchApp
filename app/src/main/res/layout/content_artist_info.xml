@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/black"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:layout_marginTop="?attr/actionBarSize"
     tools:context="de.htw_berlin.katharinapapke.feelfreetotouchapp.ArtistInfoActivity"
     tools:showIn="@layout/activity_artist_info">
 
@@ -38,8 +39,7 @@
         tools:layout_constraintBottom_creator="1"
         app:layout_constraintBottom_toBottomOf="@+id/Headline_Artist"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginBottom="52dp"
-        android:layout_marginRight="-4dp" />
+        android:layout_marginBottom="52dp" />
 
     <TextView
         android:id="@+id/Headline_Artist"
