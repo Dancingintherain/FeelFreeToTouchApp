@@ -4,17 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="de.htw_berlin.katharinapapke.feelfreetotouchapp.ArtistInfoActivity">
+    tools:context="de.htw_berlin.katharinapapke.feelfreetotouchapp.ArtistListActivity">
 
     <include layout="@layout/toolbar" />
-    <include layout="@layout/content_artist_info" />
+    <include layout="@layout/content_artist_list" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/list_floatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@drawable/ic_headset_mic_black_24dp" />
+        app:srcCompat="@drawable/ic_camera_alt_black_24dp" />
 
 </android.support.design.widget.CoordinatorLayout>

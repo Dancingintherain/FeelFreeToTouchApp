@@ -2,23 +2,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="de.htw_berlin.katharinapapke.feelfreetotouchapp.MainActivity">
-    <!--<item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never"-->
 
-    <!-- Go To Artist List -->
-
-    <item
-        android:id="@+id/get_to_List"
-        android:icon="@drawable/ic_style_black_24dp"
-        android:title="Show List of Artists"
-        android:layout_width="wrap_content"
-        app:showAsAction="always"
-        />
 
     <!-- Go to Artist Info Icon -->
+    <item
+        android:id="@+id/action_artistList"
+        android:layout_width="wrap_content"
+        android:icon="@drawable/ic_style_black_24dp"
+        android:title="Show List of Artists"
+        app:showAsAction="always" />
+
+    <!-- Go To Artist List -->
     <item
         android:id="@+id/action_artistInfo"
         android:icon="@drawable/ic_person_black_24dp"
@@ -26,4 +20,5 @@
         app:showAsAction="always"
         />
     />
+
 </menu>

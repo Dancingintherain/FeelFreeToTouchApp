@@ -11,8 +11,10 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -24,12 +26,16 @@ public class MainActivity extends AppCompatActivity {
     private Button addElementOnPictureButton;
     private ImageButton flipToArtistPageButton;
     private ImageView artObjectPicture;
+    private EditText tellArtistTextField;
+    private Direction direction = Direction.HORIZONTAL;
     final Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //set toolbar with icons
         Toolbar toolbar = (Toolbar) findViewById(R.id.menutoolbar);
         setSupportActionBar(toolbar);
 
@@ -62,9 +68,28 @@ public class MainActivity extends AppCompatActivity {
         flipPictureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                artObjectPicture.setImageBitmap(flip(BitmapFactory.decodeResource(getResources(), R.drawable.mainpicture), Direction.HORIZONTAL));
+                if (direction == Direction.HORIZONTAL)
+                {
+                    artObjectPicture.setImageBitmap(flip(BitmapFactory.decodeResource(getResources(), R.drawable.mainpicture), Direction.VERTICAL));
+                    direction = Direction.VERTICAL;
+                }
+                else
+                {
+                    artObjectPicture.setImageBitmap(flip(BitmapFactory.decodeResource(getResources(), R.drawable.mainpicture), Direction.HORIZONTAL));
+                    direction = Direction.HORIZONTAL;
+                }
             }
 
+        });
+
+        //add Elements on picture
+        addElementOnPictureButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tellArtistTextField = (EditText) findViewById(R.id.tellTheArtistTextField);
+                tellArtistTextField.setVisibility(View.VISIBLE);
+                addElementOnPictureButton.setVisibility(View.GONE);
+            }
         });
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -73,6 +98,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //custom dialog
                 final Dialog dialog = new Dialog(context);
+
+                //sets the view for the custom dialog
                 dialog.setContentView(R.layout.dialog_custom);
                 dialog.setTitle("About this App");
 
@@ -85,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
                         dialog.dismiss();
                     }
                 });
+                //opens dialog
                 dialog.show();
 
 
@@ -97,6 +125,28 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here.
+        switch(item.getItemId()) {
+
+            //if icon artistList get clicked the artistList Activity starts
+            case R.id.action_artistList:;
+                Intent intent = new Intent(MainActivity.this, ArtistListActivity.class);
+                startActivity(intent);
+                return true;
+
+            //if icon artistInfo get clicked the artistInfo Activity starts
+            case R.id.action_artistInfo:;
+                Intent intent2 = new Intent(MainActivity.this, ArtistInfoActivity.class);
+                startActivity(intent2);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
     }
 
    /* @Override

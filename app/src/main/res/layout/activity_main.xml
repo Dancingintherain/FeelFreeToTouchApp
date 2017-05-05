@@ -7,7 +7,6 @@
     tools:context="de.htw_berlin.katharinapapke.feelfreetotouchapp.MainActivity">
 
     <include layout="@layout/toolbar" />
-
     <include layout="@layout/content_main"/>
 
     <android.support.design.widget.FloatingActionButton
