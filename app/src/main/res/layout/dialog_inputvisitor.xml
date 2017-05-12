@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    tools:layout_editor_absoluteY="25dp"
+    tools:layout_editor_absoluteX="0dp">
+
+
+    <ImageView
+        android:id="@+id/bubbly"
+        android:layout_width="296dp"
+        android:layout_height="274dp"
+        app:srcCompat="@drawable/bubbly"
+        tools:layout_editor_absoluteY="128dp"
+        tools:layout_editor_absoluteX="5dp" />
+
+    <LinearLayout
+        android:layout_width="274dp"
+        android:layout_height="244dp"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="23dp"
+        tools:layout_editor_absoluteY="143dp"
+        android:weightSum="1">
+
+        <EditText
+            android:id="@+id/inputVisitorText"
+            android:layout_width="287dp"
+            android:layout_height="112dp"
+            android:ems="10"
+            android:hint="@string/tellArtistText"
+            android:inputType="textMultiLine"
+            tools:layout_editor_absoluteX="53dp"
+            tools:layout_editor_absoluteY="86dp" />
+
+        <EditText
+            android:id="@+id/visitorAge"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:hint="@string/visitorAge"
+            android:inputType="text"
+            tools:layout_editor_absoluteX="53dp"
+            tools:layout_editor_absoluteY="260dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <ImageButton
+                android:id="@+id/dismissInputVisitorDialogButton"
+                android:layout_width="45dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.35"
+                android:background="@android:color/transparent"
+                android:tint="@color/colorAccent"
+                app:srcCompat="@android:drawable/btn_dialog" />
+
+            <ImageButton
+                android:id="@+id/addVisitorInputToListButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                app:srcCompat="@android:drawable/btn_plus"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

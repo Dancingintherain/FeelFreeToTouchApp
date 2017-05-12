@@ -1,4 +1,4 @@
-package de.htw_berlin.katharinapapke.feelfreetotouchapp;
+package de.htw_berlin.katharinapapke.feelfreetotouchapp.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -13,7 +13,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import de.htw_berlin.katharinapapke.feelfreetotouchapp.ArtistListItemFragment.OnListFragmentInteractionListener;
+import de.htw_berlin.katharinapapke.feelfreetotouchapp.R;
+import de.htw_berlin.katharinapapke.feelfreetotouchapp.fragments.ArtistListItemFragment.OnListFragmentInteractionListener;
 import de.htw_berlin.katharinapapke.feelfreetotouchapp.dummy.DummyContent.DummyItem;
 
 /**

@@ -10,23 +10,24 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ArtistInfoActivity" />
+        <activity android:name=".activities.ArtistInfoActivity" />
         <activity
-            android:name=".ArtistListActivity"
+            android:name=".activities.ArtistListActivity"
             android:label="@string/title_activity_artist_list"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".activities.MainActivity"
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="de.htw_berlin.katharinapapke.feelfreetotouchapp.MainActivity" />
+                android:value="de.htw_berlin.katharinapapke.feelfreetotouchapp.activities.MainActivity" />
         </activity>
+        <activity android:name=".activities.VisitorCommentsListActivity"></activity>
     </application>
 
 </manifest>

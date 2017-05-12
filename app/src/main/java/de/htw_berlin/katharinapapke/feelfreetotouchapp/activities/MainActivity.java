@@ -1,4 +1,4 @@
-package de.htw_berlin.katharinapapke.feelfreetotouchapp;
+package de.htw_berlin.katharinapapke.feelfreetotouchapp.activities;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -19,7 +19,12 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+import de.htw_berlin.katharinapapke.feelfreetotouchapp.R;
+import de.htw_berlin.katharinapapke.feelfreetotouchapp.managment.DBManager;
+import de.htw_berlin.katharinapapke.feelfreetotouchapp.models.Comments;
+
+public class
+MainActivity extends AppCompatActivity {
 
     private Button makeToastButton;
     private Button flipPictureButton;
@@ -29,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
     private EditText tellArtistTextField;
     private Direction direction = Direction.HORIZONTAL;
     final Context context = this;
+    private DBManager dbManager;
+    public static final String LOG_TAG = MainActivity.class.getSimpleName();
+    private Comments dataSource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +58,7 @@ public class MainActivity extends AppCompatActivity {
         makeToastButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this,
-                        "Change the meaning of this art object while playing with different letters", Toast.LENGTH_LONG).show();
+                toastMessage("Change the meaning of this art object while playing with different letters");
             }
         });
 
@@ -86,9 +93,65 @@ public class MainActivity extends AppCompatActivity {
         addElementOnPictureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tellArtistTextField = (EditText) findViewById(R.id.tellTheArtistTextField);
-                tellArtistTextField.setVisibility(View.VISIBLE);
                 addElementOnPictureButton.setVisibility(View.GONE);
+                //tellArtistTextField = (EditText) findViewById(R.id.tellTheArtistTextField);
+                //tellArtistTextField.setVisibility(View.VISIBLE);
+                final Dialog dialog = new Dialog(context);
+
+                //sets the view for the custom dialog
+                dialog.setContentView(R.layout.dialog_inputvisitor);
+
+                //set custom dialog components
+                ImageButton dismissDialogButton = (ImageButton) dialog.findViewById(R.id.dismissInputVisitorDialogButton);
+                ImageButton addVisitorInputToListButton = (ImageButton) dialog.findViewById(R.id.addVisitorInputToListButton);
+                final EditText visitorInput = (EditText) dialog.findViewById(R.id.inputVisitorText);
+                final EditText visitorAge = (EditText) dialog.findViewById(R.id.visitorAge);
+
+                // if button is clicked, close the custom dialog
+                dismissDialogButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+
+                // if button is clicked, show list with visitor comments
+                addVisitorInputToListButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(MainActivity.this, VisitorCommentsListActivity.class)
+                                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+                        //get visitor comment
+                        String comment = visitorInput.getText().toString();
+                        //puts visitor comments into extra
+                        if (comment.length() != 0)
+                        {
+                            intent.putExtra("Comment", comment);
+                            visitorInput.setText("");
+
+                        } else
+                            {
+                               toastMessage("Please leave a comment here.");
+                            }
+
+                        //int age = Integer.parseInt(visitorAge.getText().toString());
+                        String age = visitorInput.getText().toString();
+                        if (age.length() != 0)
+                        {
+                            intent.putExtra("Age", age);
+                            visitorAge.setText("");
+
+                        } else
+                        {
+                            toastMessage("Please put your age here.");
+                        }
+                        startActivity(intent);
+                    }
+                });
+
+                //opens dialog
+                dialog.show();
             }
         });
 
@@ -177,5 +240,9 @@ public class MainActivity extends AppCompatActivity {
             return src;
         }
         return Bitmap.createBitmap(src, 0, 0, src.getWidth(), src.getHeight(), matrix, true);
+    }
+
+    private void toastMessage(String message){
+        Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
     }
 }

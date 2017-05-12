@@ -1,4 +1,4 @@
-package de.htw_berlin.katharinapapke.feelfreetotouchapp;
+package de.htw_berlin.katharinapapke.feelfreetotouchapp.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,35 +10,38 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-public class ArtistInfoActivity extends AppCompatActivity {
+import de.htw_berlin.katharinapapke.feelfreetotouchapp.fragments.ArtistListItemFragment;
+import de.htw_berlin.katharinapapke.feelfreetotouchapp.R;
+import de.htw_berlin.katharinapapke.feelfreetotouchapp.dummy.DummyContent;
+
+public class ArtistListActivity extends AppCompatActivity implements ArtistListItemFragment.OnListFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_artist_info);
+        setContentView(R.layout.activity_artist_list);
         Toolbar toolbar = (Toolbar) findViewById(R.id.menutoolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.list_floatingActionButton);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "This will be a link to the recent exhibition/Audiotape starts", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
-        //sets Back-Icon next to Toolbar Title
+        //sets back-icon next to toolbar title
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        //sets MenuItem artistInfo invisible
-        MenuItem actionArtistInfo = menu.findItem(R.id.action_artistInfo);
-        actionArtistInfo.setVisible(false);
+        //sets MenuItem artistList invisible
+        MenuItem actionArtistList = menu.findItem(R.id.action_artistList);
+        actionArtistList.setVisible(false);
         return true;
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -51,15 +54,18 @@ public class ArtistInfoActivity extends AppCompatActivity {
         // Handle action bar item clicks here.
         switch(item.getItemId()) {
 
-            //if icon artistList get clicked the artistList Activity starts
-            case R.id.action_artistList:;
-                Intent intent = new Intent(ArtistInfoActivity.this, ArtistListActivity.class);
+            //If icon artistList get clicked the artistList activity starts
+            case R.id.action_artistInfo:;
+                Intent intent = new Intent(ArtistListActivity.this, ArtistInfoActivity.class);
                 startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
-
     }
 
+    @Override
+    public void onListFragmentInteraction(DummyContent.DummyItem item) {
+
+    }
 }

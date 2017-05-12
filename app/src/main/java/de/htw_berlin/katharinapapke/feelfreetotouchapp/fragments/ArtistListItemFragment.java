@@ -1,4 +1,4 @@
-package de.htw_berlin.katharinapapke.feelfreetotouchapp;
+package de.htw_berlin.katharinapapke.feelfreetotouchapp.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import de.htw_berlin.katharinapapke.feelfreetotouchapp.adapter.MyArtistListItemRecyclerViewAdapter;
+import de.htw_berlin.katharinapapke.feelfreetotouchapp.R;
 import de.htw_berlin.katharinapapke.feelfreetotouchapp.dummy.DummyContent;
 import de.htw_berlin.katharinapapke.feelfreetotouchapp.dummy.DummyContent.DummyItem;
 

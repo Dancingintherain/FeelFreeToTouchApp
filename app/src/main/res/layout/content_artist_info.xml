@@ -7,7 +7,7 @@
     android:background="@android:color/black"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:layout_marginTop="?attr/actionBarSize"
-    tools:context="de.htw_berlin.katharinapapke.feelfreetotouchapp.ArtistInfoActivity"
+    tools:context="de.htw_berlin.katharinapapke.feelfreetotouchapp.activities.ArtistInfoActivity"
     tools:showIn="@layout/activity_artist_info">
 
     <ImageView
