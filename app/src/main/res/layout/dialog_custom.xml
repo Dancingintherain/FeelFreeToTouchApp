@@ -33,9 +33,10 @@
         android:layout_width="wrap_content"
         android:tint="@color/colorAccent"
         android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
+        android:background="@android:color/black"
         app:srcCompat="@android:drawable/btn_dialog"
-        android:layout_alignBottom="@+id/aboutThisAppText"
+        android:layout_below="@+id/aboutThisAppText"
+        android:layout_alignStart="@+id/aboutThisAppText"
         android:layout_alignEnd="@+id/aboutThisAppText" />
 
 </RelativeLayout>

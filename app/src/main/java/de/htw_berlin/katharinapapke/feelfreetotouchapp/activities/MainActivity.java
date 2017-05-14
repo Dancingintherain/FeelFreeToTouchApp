@@ -89,13 +89,11 @@ MainActivity extends AppCompatActivity {
 
         });
 
-        //add Elements on picture
+        //shows dialog for visitor input
         addElementOnPictureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 addElementOnPictureButton.setVisibility(View.GONE);
-                //tellArtistTextField = (EditText) findViewById(R.id.tellTheArtistTextField);
-                //tellArtistTextField.setVisibility(View.VISIBLE);
                 final Dialog dialog = new Dialog(context);
 
                 //sets the view for the custom dialog
@@ -103,9 +101,9 @@ MainActivity extends AppCompatActivity {
 
                 //set custom dialog components
                 ImageButton dismissDialogButton = (ImageButton) dialog.findViewById(R.id.dismissInputVisitorDialogButton);
-                ImageButton addVisitorInputToListButton = (ImageButton) dialog.findViewById(R.id.addVisitorInputToListButton);
+                Button addVisitorInputToListButton = (Button) dialog.findViewById(R.id.addVisitorInputToListButton);
                 final EditText visitorInput = (EditText) dialog.findViewById(R.id.inputVisitorText);
-                final EditText visitorAge = (EditText) dialog.findViewById(R.id.visitorAge);
+                final EditText visitorInputExhibition= (EditText) dialog.findViewById(R.id.inputVisitorExhibition);
 
                 // if button is clicked, close the custom dialog
                 dismissDialogButton.setOnClickListener(new View.OnClickListener() {
@@ -135,16 +133,15 @@ MainActivity extends AppCompatActivity {
                                toastMessage("Please leave a comment here.");
                             }
 
-                        //int age = Integer.parseInt(visitorAge.getText().toString());
-                        String age = visitorInput.getText().toString();
-                        if (age.length() != 0)
+                        String exhibition = visitorInputExhibition.getText().toString();
+                        if (exhibition.length() != 0)
                         {
-                            intent.putExtra("Age", age);
-                            visitorAge.setText("");
+                            intent.putExtra("Exhibition", exhibition);
+                            visitorInputExhibition.setText("");
 
                         } else
                         {
-                            toastMessage("Please put your age here.");
+                            toastMessage("Please leave a comment about the exhibition here.");
                         }
                         startActivity(intent);
                     }

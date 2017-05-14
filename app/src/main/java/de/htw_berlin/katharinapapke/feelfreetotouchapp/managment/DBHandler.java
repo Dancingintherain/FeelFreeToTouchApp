@@ -11,8 +11,9 @@ import android.util.Log;
 
 public class DBHandler extends SQLiteOpenHelper {
 
-    private static DBHandler sInstance = null;
     private static final String LOG_TAG = DBHandler.class.getSimpleName();
+
+    private static DBHandler sInstance = null;
 
     // Database Version
     private static final int DATABASE_VERSION = 3;
@@ -31,6 +32,7 @@ public class DBHandler extends SQLiteOpenHelper {
             + KEY_COMMENT + " TEXT, "
             + KEY_VISITOR_AGE + " TEXT); ";
 
+    //Singleton
     public static synchronized DBHandler getInstance(Context context) {
 
         if (sInstance == null) {
@@ -53,8 +55,6 @@ public class DBHandler extends SQLiteOpenHelper {
         catch (Exception ex){
             Log.d(LOG_TAG, "Fehler beim Anlegen der Tabelle: " + ex.getMessage());
         }
-
-
     }
 
     @Override

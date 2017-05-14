@@ -4,17 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/black"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="de.htw_berlin.katharinapapke.feelfreetotouchapp.activities.VisitorCommentsListActivity">
 
-    <ListView
-        android:id="@+id/visitor_comments_list_view"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:dividerHeight="1dp"
-        android:padding="10dp"
-        tools:layout_editor_absoluteY="0dp"
-        tools:layout_editor_absoluteX="0dp">
-    </ListView>
+    <include layout="@layout/toolbar"
+        tools:layout_editor_absoluteY="226dp"
+        tools:layout_editor_absoluteX="38dp" />
 
     <TextView
         android:id="@+id/empty"
@@ -22,8 +18,17 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:text="@string/empty_list_text"
-        tools:layout_editor_absoluteY="0dp"
-        tools:layout_editor_absoluteX="0dp" />
+        tools:layout_editor_absoluteY="230dp"
+        tools:layout_editor_absoluteX="23dp" />
+
+    <ListView
+        android:id="@+id/visitor_comments_list_view"
+        android:layout_width="316dp"
+        android:layout_height="455dp"
+        android:dividerHeight="1dp"
+        android:padding="10dp"
+        tools:layout_editor_absoluteX="2dp"
+        tools:layout_editor_absoluteY="56dp"></ListView>
 
 
 </android.support.constraint.ConstraintLayout>

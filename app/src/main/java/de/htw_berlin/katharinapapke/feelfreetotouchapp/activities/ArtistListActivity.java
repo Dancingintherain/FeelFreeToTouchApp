@@ -54,7 +54,7 @@ public class ArtistListActivity extends AppCompatActivity implements ArtistListI
         // Handle action bar item clicks here.
         switch(item.getItemId()) {
 
-            //If icon artistList get clicked the artistList activity starts
+            //If icon artistInfo get clicked the artistInfo activity starts
             case R.id.action_artistInfo:;
                 Intent intent = new Intent(ArtistListActivity.this, ArtistInfoActivity.class);
                 startActivity(intent);

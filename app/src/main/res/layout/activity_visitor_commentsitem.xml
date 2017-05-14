@@ -3,28 +3,32 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:layout_marginTop="?attr/actionBarSize"
     android:weightSum="1">
 
     <TextView
         android:id="@+id/commentsList_Id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="8dp"
+        android:paddingTop="8dp"
+        android:textColor="@color/colorAccent"
         android:textAppearance="?attr/textAppearanceListItem" />
 
     <TextView
         android:id="@+id/commentsList_visitorcomment"
-        android:layout_width="290dp"
+        android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_margin="@dimen/text_margin"
         android:textAppearance="?attr/textAppearanceListItem"
         android:textColor="@color/colorAccent" />
 
     <TextView
-        android:id="@+id/commentsList_age"
-        android:layout_width="290dp"
+        android:id="@+id/commentsList_exhibitionComment"
+        android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_margin="@dimen/text_margin"
+        android:paddingTop="8dp"
+        android:layout_marginTop="8dp"
         android:textAppearance="?attr/textAppearanceListItem"
         android:textColor="@color/colorAccent" />
 
