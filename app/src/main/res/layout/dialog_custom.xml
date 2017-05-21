@@ -1,42 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="25dp">
 
-    <TextView
-        android:id="@+id/aboutThisAppText"
-        android:layout_width="260dp"
-        android:layout_height="260dp"
-        android:text="@string/InfoText"
-        android:background="#ff000000"
-        android:textColor="@color/colorAccent"
-        android:paddingRight="16dp"
-        android:paddingLeft="16dp"
-        android:paddingTop="40dp"
-        android:paddingBottom="8dp"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/aboutThisAppHeadline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/text_size_big"
-        android:layout_alignStart="@+id/aboutThisAppText"
-        android:layout_alignTop="@+id/aboutThisAppText"
-        android:padding="8dp"
-        android:text="@string/aboutText"
-        android:textColor="@color/colorAccent" />
+        <TextView
+            android:id="@+id/aboutThisAppText"
+            android:layout_width="319dp"
+            android:layout_height="364dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:background="#ff000000"
+            android:paddingBottom="8dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="40dp"
+            android:text="@string/InfoText"
+            android:textColor="@color/colorAccent"
+            tools:layout_constraintLeft_creator="1"
+            tools:layout_constraintRight_creator="1"
+            tools:layout_constraintTop_creator="1"
+            tools:layout_editor_absoluteY="94dp"
+            tools:layout_editor_absoluteX="0dp" />
 
-    <ImageButton
-        android:id="@+id/dismissDialogButton"
-        android:layout_width="wrap_content"
-        android:tint="@color/colorAccent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/black"
-        app:srcCompat="@android:drawable/btn_dialog"
-        android:layout_below="@+id/aboutThisAppText"
-        android:layout_alignStart="@+id/aboutThisAppText"
-        android:layout_alignEnd="@+id/aboutThisAppText" />
+        <TextView
+            android:id="@+id/aboutThisAppHeadline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/aboutThisAppText"
+            android:layout_alignTop="@+id/aboutThisAppText"
+            android:fontFamily="bold"
+            android:padding="8dp"
+            android:text="@string/aboutText"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/text_size_big"
+            app:layout_constraintLeft_toLeftOf="@+id/aboutThisAppText"
+            app:layout_constraintTop_toTopOf="@+id/aboutThisAppText"
+            tools:layout_constraintLeft_creator="1"
+            tools:layout_constraintTop_creator="1" />
 
-</RelativeLayout>
+        <ImageButton
+            android:id="@+id/dismissDialogButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/aboutThisAppText"
+            android:layout_alignStart="@+id/aboutThisAppText"
+            android:layout_below="@+id/aboutThisAppText"
+            android:layout_marginBottom="3dp"
+            android:background="@android:color/black"
+            android:tint="@color/colorAccent"
+            app:layout_constraintBottom_toBottomOf="@+id/aboutThisAppText"
+            app:layout_constraintRight_toRightOf="@+id/aboutThisAppText"
+            app:srcCompat="@android:drawable/btn_dialog"
+            tools:layout_constraintBottom_creator="1"
+            tools:layout_constraintRight_creator="1" />
+    </android.support.constraint.ConstraintLayout>
+
+</LinearLayout>

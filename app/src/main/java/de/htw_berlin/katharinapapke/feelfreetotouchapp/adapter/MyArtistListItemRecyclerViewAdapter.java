@@ -2,7 +2,6 @@ package de.htw_berlin.katharinapapke.feelfreetotouchapp.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,20 +13,20 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import de.htw_berlin.katharinapapke.feelfreetotouchapp.R;
+import de.htw_berlin.katharinapapke.feelfreetotouchapp.dummy.DummyContent.ArtistListItem;
 import de.htw_berlin.katharinapapke.feelfreetotouchapp.fragments.ArtistListItemFragment.OnListFragmentInteractionListener;
-import de.htw_berlin.katharinapapke.feelfreetotouchapp.dummy.DummyContent.DummyItem;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
+ * {@link RecyclerView.Adapter} that can display a {@link ArtistListItem} and makes a call to the
  * specified {@link OnListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
 public class MyArtistListItemRecyclerViewAdapter extends RecyclerView.Adapter<MyArtistListItemRecyclerViewAdapter.ViewHolder> {
 
-    private final List<DummyItem> mValues;
+    private final List<ArtistListItem> mValues;
     private final OnListFragmentInteractionListener mListener;
 
-    public MyArtistListItemRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
+    public MyArtistListItemRecyclerViewAdapter(List<ArtistListItem> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
@@ -42,17 +41,18 @@ public class MyArtistListItemRecyclerViewAdapter extends RecyclerView.Adapter<My
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        //Texte werden gesetzt
+        // ID und Texte werden gesetzt
         holder.mIdView.setText(mValues.get(position).id);
         holder.artistText.setText(mValues.get(position).content);
+        //holder.artistObjectinList.setImageDrawable(double);
 
-        //hier werden Bilder geladen
-        Context context = holder.artistText.getContext();
-        //String url = "http://lorempixel.com/600/400/cats/?fakeId="+ holder.mItem.id;
-        //holder.mbild;
-        String url = holder.mItem.details;
-        Log.i(url, "onBindViewHolder: ");
-        Picasso.with(context).load(url).into(holder.artistObjectinList);
+        //Pictures from Server/Web would be loaded - now only drawables will be loaded
+        /*String url = holder.mItem.details;
+        Log.i(url, "onBindViewHolder: ");*/
+
+        Context context = holder.artistObjectinList.getContext();
+        Picasso.with(context).load(R.drawable.mainpicture).placeholder(R.drawable.artist_picture)
+                .error(R.drawable.artist_picture).into(holder.artistObjectinList);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,7 +75,7 @@ public class MyArtistListItemRecyclerViewAdapter extends RecyclerView.Adapter<My
         public final View mView;
         public final TextView mIdView;
         public final TextView artistText;
-        public DummyItem mItem;
+        public ArtistListItem mItem;
         public final ImageView artistObjectinList;
 
         public ViewHolder(View view) {

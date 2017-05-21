@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import de.htw_berlin.katharinapapke.feelfreetotouchapp.adapter.MyArtistListItemRecyclerViewAdapter;
 import de.htw_berlin.katharinapapke.feelfreetotouchapp.R;
 import de.htw_berlin.katharinapapke.feelfreetotouchapp.dummy.DummyContent;
-import de.htw_berlin.katharinapapke.feelfreetotouchapp.dummy.DummyContent.DummyItem;
+import de.htw_berlin.katharinapapke.feelfreetotouchapp.dummy.DummyContent.ArtistListItem;
 
 /**
  * A fragment representing a list of Items.
@@ -105,6 +105,6 @@ public class ArtistListItemFragment extends Fragment {
      */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+        void onListFragmentInteraction(ArtistListItem item);
     }
 }
