@@ -19,6 +19,7 @@
     <TextView
         android:id="@+id/commentsList_visitorcomment"
         android:layout_width="match_parent"
+        android:textStyle="italic"
         android:layout_height="40dp"
         android:textAppearance="?attr/textAppearanceListItem"
         android:textColor="@color/colorAccent" />
@@ -27,6 +28,7 @@
         android:id="@+id/commentsList_exhibitionComment"
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:textStyle="italic"
         android:paddingTop="8dp"
         android:layout_marginTop="8dp"
         android:textAppearance="?attr/textAppearanceListItem"

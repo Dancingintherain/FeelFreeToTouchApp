@@ -19,8 +19,8 @@
 
     <EditText
         android:id="@+id/inputVisitorText"
-        android:layout_width="266dp"
-        android:layout_height="128dp"
+        android:layout_width="267dp"
+        android:layout_height="106dp"
         android:ems="10"
         android:hint="@string/tellArtistText"
         android:textColorHint="@color/colorAccent"
@@ -28,7 +28,8 @@
         android:inputType="textMultiLine"
         android:textSize="16dip"
         tools:layout_editor_absoluteX="27dp"
-        tools:layout_editor_absoluteY="108dp" />
+        app:layout_constraintTop_toTopOf="@+id/bubbly"
+        android:layout_marginTop="8dp" />
 
     <EditText
         android:id="@+id/inputVisitorExhibition"
@@ -42,8 +43,12 @@
         android:hint="@string/visitorInputExhibition"
         android:inputType="text|textMultiLine"
         android:textSize="16dip"
-        tools:layout_editor_absoluteX="27dp"
-        tools:layout_editor_absoluteY="244dp" />
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="@+id/bubbly"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="@+id/bubbly"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/inputVisitorText" />
 
     <Button
         android:id="@+id/addVisitorInputToListButton"
@@ -52,8 +57,10 @@
         android:background="@color/colorAccent"
         android:text="Save your comment"
         android:layout_marginStart="31dp"
-        tools:layout_editor_absoluteY="382dp"
-        tools:layout_editor_absoluteX="27dp" />
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/inputVisitorExhibition"
+        android:layout_marginLeft="4dp"
+        app:layout_constraintLeft_toLeftOf="@+id/bubbly" />
 
     <ImageButton
         android:id="@+id/dismissInputVisitorDialogButton"
@@ -64,8 +71,10 @@
         android:background="@color/colorAccent"
         android:layout_marginStart="17dp"
         android:layout_marginEnd="13dp"
-        tools:layout_editor_absoluteY="382dp"
-        tools:layout_editor_absoluteX="245dp" />
+        app:layout_constraintLeft_toRightOf="@+id/addVisitorInputToListButton"
+        android:layout_marginLeft="28dp"
+        app:layout_constraintBottom_toBottomOf="@+id/bubbly"
+        android:layout_marginBottom="54dp" />
 
 
 </android.support.constraint.ConstraintLayout>

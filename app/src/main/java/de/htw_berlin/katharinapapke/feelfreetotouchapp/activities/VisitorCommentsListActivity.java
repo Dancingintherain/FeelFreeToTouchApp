@@ -43,7 +43,7 @@ public class VisitorCommentsListActivity extends AppCompatActivity {
         dbManager.open();
 
         //gets input values from visitor input dialog
-        String comment = getIntent().getStringExtra("Comment");
+        String comment = "'"+getIntent().getStringExtra("Comment")+"'";
         String exhibition = getIntent().getStringExtra("Exhibition");
 
         //creates new object Comments from visitor input in dialog and insert to db
@@ -77,6 +77,9 @@ public class VisitorCommentsListActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String name = parent.getItemAtPosition(position).toString();
+                Log.d(TAG, "onItemClick: You Clicked on " + name);
+
                 TextView idTextView = (TextView) view.findViewById(R.id.commentsList_Id);
                 TextView visitorCommentTextView = (TextView) view.findViewById(R.id.commentsList_visitorcomment);
                 TextView visitorCommentExhibitionTextView = (TextView) view.findViewById(R.id.commentsList_exhibitionComment);
@@ -85,7 +88,11 @@ public class VisitorCommentsListActivity extends AppCompatActivity {
                 String comment = visitorCommentTextView.getText().toString();
                 String visitorCommentExhibition = visitorCommentExhibitionTextView.getText().toString();
 
-                final Dialog dialog = new Dialog(context);
+                Log.i(TAG, _id);
+                Log.i(TAG, comment);
+                Log.i(TAG, visitorCommentExhibition);
+
+                final Dialog dialog = new Dialog(getApplicationContext());
                 //sets the view for the custom dialog
                 dialog.setContentView(R.layout.dialog_custom);
                 //opens dialog
@@ -128,4 +135,4 @@ public class VisitorCommentsListActivity extends AppCompatActivity {
         }
 
     }
-    }
+}

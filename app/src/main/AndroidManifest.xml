@@ -27,7 +27,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="de.htw_berlin.katharinapapke.feelfreetotouchapp.activities.MainActivity" />
         </activity>
-        <activity android:name=".activities.VisitorCommentsListActivity"></activity>
+        <activity android:name=".activities.VisitorCommentsListActivity" />
     </application>
 
 </manifest>

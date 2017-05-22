@@ -32,9 +32,10 @@
             android:layout_height="65dp"
             android:layout_marginBottom="24dp"
             android:layout_marginLeft="8dp"
+            android:textSize="@dimen/text_size_big"
             android:textStyle="bold"
             android:textColor="@color/colorAccent"
-            android:text="ARTIST AND THEIR WORK" />
+            android:text="@string/artist_list_headline"/>
 
         <include
             layout="@layout/content_artist_list"
