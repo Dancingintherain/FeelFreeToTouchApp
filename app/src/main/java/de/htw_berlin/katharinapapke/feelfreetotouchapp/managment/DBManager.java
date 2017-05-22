@@ -65,12 +65,14 @@ public class DBManager {
         contentValues.put(DBHandler.KEY_COMMENT, comment.getComment());
         contentValues.put(DBHandler.KEY_VISITOR_AGE, comment.getAge());
         int i = database.update(DBHandler.TABLE_COMMENTS, contentValues, DBHandler.ID + " = " + comment.getId(), null);
+        Log.d(LOG_TAG, "updated comment in database");
         return i;
     }
 
     //Deletes comment
-    public void delete(long _id) {
+    public void delete(int _id) {
         database.delete(DBHandler.TABLE_COMMENTS, DBHandler.ID + "=" + _id, null);
+        Log.d(LOG_TAG, "deleted comment in database");
     }
 
 }

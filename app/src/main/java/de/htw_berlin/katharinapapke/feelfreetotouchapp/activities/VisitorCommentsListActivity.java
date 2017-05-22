@@ -1,7 +1,6 @@
 package de.htw_berlin.katharinapapke.feelfreetotouchapp.activities;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -13,6 +12,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
@@ -28,7 +30,6 @@ public class VisitorCommentsListActivity extends AppCompatActivity {
     private static final String TAG =  VisitorCommentsListActivity.class.getSimpleName();
 
     private ListView listView;
-    private Context context;
     private DBManager dbManager;
     private SimpleCursorAdapter adapter;
 
@@ -73,7 +74,7 @@ public class VisitorCommentsListActivity extends AppCompatActivity {
 
         listView.setAdapter(adapter);
 
-        // OnCLickListener For List Items
+        // OnCLickListener For List Items - open edit/delete custom dialog
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -88,13 +89,60 @@ public class VisitorCommentsListActivity extends AppCompatActivity {
                 String comment = visitorCommentTextView.getText().toString();
                 String visitorCommentExhibition = visitorCommentExhibitionTextView.getText().toString();
 
-                Log.i(TAG, _id);
+                //Log.i(TAG, _id);
                 Log.i(TAG, comment);
                 Log.i(TAG, visitorCommentExhibition);
 
-                final Dialog dialog = new Dialog(getApplicationContext());
+                //sets custom dialog
+                final Dialog dialog = new Dialog(VisitorCommentsListActivity.this);
+
                 //sets the view for the custom dialog
-                dialog.setContentView(R.layout.dialog_custom);
+                dialog.setContentView(R.layout.dialog_edit_delete_inputvisitor);
+
+                //set custom dialog components
+                final EditText commentsEditField = (EditText) dialog.findViewById(R.id.comments_inputVisitor_edit_delete_dialog);
+                final EditText exhibitioncommentsEditField = (EditText) dialog.findViewById(R.id.exhibiton_comments_inputVisitor_edit_delete_dialog);
+                final EditText _idEditField = (EditText) dialog.findViewById(R.id.id_inputVisitor_edit_delete_dialog);
+                ImageButton cancelButton = (ImageButton) dialog.findViewById(R.id.cancelButton_edit_delete_dialog);
+                Button editButton = (Button) dialog.findViewById(R.id.editButton_edit_delete_dialog);
+                Button deleteButton = (Button) dialog.findViewById(R.id.deleteButton_edit_delete_dialog);
+
+                //sets visitor input text to edit text fields
+                commentsEditField.setText(comment);
+                exhibitioncommentsEditField.setText(visitorCommentExhibition);
+                _idEditField.setText(_id);
+
+                // if cancel button is clicked, go back to list view
+                cancelButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+
+                // if delete button is clicked, delete the entry from database
+                deleteButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int _id = Integer.parseInt(_idEditField.getText().toString());
+                        dbManager.delete(_id);
+                        dialog.dismiss();
+                    }
+                });
+
+                // if editButton is clicked, edit the text and save into database
+                editButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String editComment = commentsEditField.getText().toString();
+                        String editExhbitionComment = exhibitioncommentsEditField.getText().toString();
+                        int _id = Integer.parseInt(_idEditField.getText().toString());
+
+                        Comments newEditedComment = new Comments(_id, editComment, editExhbitionComment);
+                        dbManager.update(newEditedComment);
+                        dialog.dismiss();
+                    }
+                });
                 //opens dialog
                 dialog.show();
             }

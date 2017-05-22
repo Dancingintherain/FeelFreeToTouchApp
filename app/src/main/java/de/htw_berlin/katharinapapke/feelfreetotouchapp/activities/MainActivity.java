@@ -20,23 +20,18 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import de.htw_berlin.katharinapapke.feelfreetotouchapp.R;
-import de.htw_berlin.katharinapapke.feelfreetotouchapp.managment.DBManager;
-import de.htw_berlin.katharinapapke.feelfreetotouchapp.models.Comments;
 
 public class
 MainActivity extends AppCompatActivity {
 
     private Button makeToastButton;
     private Button flipPictureButton;
-    private Button addElementOnPictureButton;
+    private Button showInputDialog;
     private ImageButton flipToArtistPageButton;
     private ImageView artObjectPicture;
-    private EditText tellArtistTextField;
     private Direction direction = Direction.HORIZONTAL;
     final Context context = this;
-    private DBManager dbManager;
     public static final String LOG_TAG = MainActivity.class.getSimpleName();
-    private Comments dataSource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +45,7 @@ MainActivity extends AppCompatActivity {
         //get view elements
         makeToastButton = (Button) findViewById(R.id.makeToastButton);
         flipPictureButton = (Button) findViewById(R.id.flipPictureButton);
-        addElementOnPictureButton = (Button) findViewById(R.id.addElementsInPictureButton);
+        showInputDialog = (Button) findViewById(R.id.addElementsInPictureButton);
         flipToArtistPageButton =(ImageButton) findViewById(R.id.flipToNextPage);
         artObjectPicture = (ImageView) findViewById(R.id.art_object_picture);
 
@@ -90,10 +85,10 @@ MainActivity extends AppCompatActivity {
         });
 
         //shows dialog for visitor input
-        addElementOnPictureButton.setOnClickListener(new View.OnClickListener() {
+        showInputDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addElementOnPictureButton.setVisibility(View.GONE);
+                showInputDialog.setVisibility(View.GONE);
                 final Dialog dialog = new Dialog(context);
 
                 //sets the view for the custom dialog
