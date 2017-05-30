@@ -79,6 +79,7 @@ public class VisitorCommentsListActivity extends AppCompatActivity {
         Cursor cursor = dbManager.fetch();
         adapter = new SimpleCursorAdapter(this, R.layout.activity_visitor_commentsitem, cursor, from, to, 0);
         listView.setAdapter(adapter);
+        listView.setSelection(listView.getAdapter().getCount()-1);
 
         // OnCLickListener For List Items - open edit/delete custom dialog
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

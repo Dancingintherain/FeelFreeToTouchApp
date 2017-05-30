@@ -44,15 +44,15 @@ public class MyArtistListItemRecyclerViewAdapter extends RecyclerView.Adapter<My
         // ID und Texte werden gesetzt
         holder.mIdView.setText(mValues.get(position).id);
         holder.artistText.setText(mValues.get(position).content);
-        //holder.artistObjectinList.setImageDrawable(double);
+        //holder.artistObjectinList.setImageResource(R.drawable.list_picture);
 
         //Pictures from Server/Web would be loaded - now only drawables will be loaded
         /*String url = holder.mItem.details;
         Log.i(url, "onBindViewHolder: ");*/
 
         Context context = holder.artistObjectinList.getContext();
-        Picasso.with(context).load(R.drawable.mainpicturesmall).placeholder(R.drawable.artist_picture)
-                .error(R.drawable.artist_picture).into(holder.artistObjectinList);
+        Picasso.with(context).load(R.drawable.list_picture).placeholder(R.drawable.artist_picture)
+                .error(R.drawable.artist_picture).fit().into(holder.artistObjectinList);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override

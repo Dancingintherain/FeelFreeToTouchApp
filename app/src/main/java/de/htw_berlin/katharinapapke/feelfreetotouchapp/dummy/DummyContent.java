@@ -54,7 +54,7 @@ public class DummyContent {
     }
 
     public static String getPicturePath (){
-        String filepath = "/Users/Berlina/AndroidStudioProjects/FeelFreeToTouchApp/app/src/main/res/drawable/artist_picture.jpeg";
+        String filepath = "/Users/Berlina/AndroidStudioProjects/FeelFreeToTouchApp/app/src/main/res/drawable/artist_picture.jpg";
         return filepath;
     }
 

@@ -69,10 +69,11 @@ MainActivity extends AppCompatActivity {
         });
 
         //flip Picture when Button is pressed
+
         flipPictureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                flipPictureButton.setImageResource(R.drawable.ic_autorenew_black_24dp);
+                flipPictureButton.setImageResource(R.drawable.ic_swap_vertical_circle_black_24dp);
                 if (direction == Direction.HORIZONTAL)
                 {
                     artObjectPicture.setImageBitmap(flip(BitmapFactory.decodeResource(getResources(), R.drawable.mainpicturesmall), Direction.VERTICAL));
@@ -223,6 +224,20 @@ MainActivity extends AppCompatActivity {
     }*/
 
     public enum Direction { VERTICAL, HORIZONTAL };
+
+    public void flip(){
+        Thread thread = new Thread(new Runnable(){
+            @Override
+            public void run(){
+                //code to do the HTTP request
+            }
+        });
+        thread.start();
+
+    }
+
+
+
     public static Bitmap flip(Bitmap src, Direction type) {
         Matrix matrix = new Matrix();
 

@@ -12,7 +12,7 @@
 
 
     <!-- Artist Info Activity-->
-    <string name="InfoTextAboutTheArtist">Wer also war Charlotte Moorman? Sie war eine Southern Belle, geboren 1933. "Miss City Beautiful" 1952 von Little Rock, Arkansas, dem Städtchen, in dem sie in der Obhut zweier Frauen, von Mutter und Großmutter, aufwuchs. Klassische Musikausbildung. Absolventin der berühmten Juilliard School. </string>
+    <string name="InfoTextAboutTheArtist">Madeline Charlotte Moorman (November 18, 1933 – November 8, 1991) was an American cellist, performance artist, and advocate for avant-garde music. Referred to as the "Jeanne d'Arc of new music," she was the founder of the Annual Avant Garde Festival of New York and a frequent collaborator with Korean artist Nam June Paik.(From Wikipedia) </string>
     <string name="HeadlineAboutTheArtist">About the Artist</string>
     <string name="title_activity_second">SecondActivity</string>
     <string name="title_activity_artist">The Artist</string>
