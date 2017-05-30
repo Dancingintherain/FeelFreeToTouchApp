@@ -54,6 +54,8 @@
         android:layout_height="157dp"
         android:text="@string/InfoTextAboutTheArtist"
         android:textColor="@color/colorAccent"
+        android:maxLines = "30"
+        android:scrollbars = "vertical"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
         android:layout_marginLeft="8dp"
