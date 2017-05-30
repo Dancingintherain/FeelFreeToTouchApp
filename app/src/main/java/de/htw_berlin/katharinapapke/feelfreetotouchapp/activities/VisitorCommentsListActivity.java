@@ -42,19 +42,27 @@ public class VisitorCommentsListActivity extends AppCompatActivity {
         //create and opens database
         dbManager = new DBManager(this);
         dbManager.open();
-
-        //gets input values from visitor input dialog
-        String comment = "'"+getIntent().getStringExtra("Comment")+"'";
-        String exhibition = getIntent().getStringExtra("Exhibition");
-
-        //creates new object Comments from visitor input in dialog and insert to db
-        Comments newComment = new Comments(comment, exhibition);
-        dbManager.insert(newComment);
-
+        //put visitor input into database if set
+        putVisitorInputIntoDatabase();
         //sets view
         setContentView(R.layout.activity_visitor_comments_list);
         listView = (ListView) findViewById(R.id.visitor_comments_list_view);
         populateListView();
+    }
+
+    private void putVisitorInputIntoDatabase(){
+        //puts visitor info into database only if intent has extras
+        Bundle extras = getIntent().getExtras();
+        if (extras != null)
+            {
+            //gets input values from visitor input dialog
+            String comment = "'"+getIntent().getStringExtra("Comment")+"'";
+            String exhibition = "'"+getIntent().getStringExtra("Exhibition")+"'";
+
+            //creates new object Comments from visitor input in dialog and insert to db
+            Comments newComment = new Comments(comment, exhibition);
+            dbManager.insert(newComment);
+            }
     }
 
     private void populateListView() {
@@ -70,8 +78,6 @@ public class VisitorCommentsListActivity extends AppCompatActivity {
 
         Cursor cursor = dbManager.fetch();
         adapter = new SimpleCursorAdapter(this, R.layout.activity_visitor_commentsitem, cursor, from, to, 0);
-        //adapter.notifyDataSetChanged();
-
         listView.setAdapter(adapter);
 
         // OnCLickListener For List Items - open edit/delete custom dialog
@@ -126,6 +132,7 @@ public class VisitorCommentsListActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         int _id = Integer.parseInt(_idEditField.getText().toString());
                         dbManager.delete(_id);
+                        adapter.notifyDataSetChanged();
                         dialog.dismiss();
                     }
                 });
@@ -140,11 +147,13 @@ public class VisitorCommentsListActivity extends AppCompatActivity {
 
                         Comments newEditedComment = new Comments(_id, editComment, editExhbitionComment);
                         dbManager.update(newEditedComment);
+                        adapter.notifyDataSetChanged();
                         dialog.dismiss();
                     }
                 });
                 //opens dialog
                 dialog.show();
+                adapter.notifyDataSetChanged();
             }
         });
     }

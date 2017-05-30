@@ -24,13 +24,14 @@ import de.htw_berlin.katharinapapke.feelfreetotouchapp.R;
 public class
 MainActivity extends AppCompatActivity {
 
-    private Button makeToastButton;
-    private Button flipPictureButton;
-    private Button showInputDialog;
-    private ImageButton flipToArtistPageButton;
     private ImageView artObjectPicture;
+    private ImageButton makeToastButton;
+    private ImageButton flipPictureButton;
+    private ImageButton showInputDialogButton;
+    private ImageButton flipToArtistPageButton;
     private Direction direction = Direction.HORIZONTAL;
     final Context context = this;
+
     public static final String LOG_TAG = MainActivity.class.getSimpleName();
 
     @Override
@@ -43,17 +44,18 @@ MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         //get view elements
-        makeToastButton = (Button) findViewById(R.id.makeToastButton);
-        flipPictureButton = (Button) findViewById(R.id.flipPictureButton);
-        showInputDialog = (Button) findViewById(R.id.addElementsInPictureButton);
-        flipToArtistPageButton =(ImageButton) findViewById(R.id.flipToNextPage);
         artObjectPicture = (ImageView) findViewById(R.id.art_object_picture);
+        makeToastButton = (ImageButton) findViewById(R.id.imageButtonMain_makeToast);
+        flipPictureButton = (ImageButton) findViewById(R.id.imageButtonMain_flipPicture);
+        showInputDialogButton = (ImageButton) findViewById(R.id.imageButtonMain_makeComment);
+        flipToArtistPageButton =(ImageButton) findViewById(R.id.flipToNextPage);
 
         //show Toast-Test when Button is pressed
         makeToastButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                toastMessage("Change the meaning of this art object while playing with different letters");
+                makeToastButton.setImageResource(R.drawable.ic_info_black_24dp);
+                toastMessage("This art object was all about creating new context with letters");
             }
         });
 
@@ -70,14 +72,15 @@ MainActivity extends AppCompatActivity {
         flipPictureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                flipPictureButton.setImageResource(R.drawable.ic_autorenew_black_24dp);
                 if (direction == Direction.HORIZONTAL)
                 {
-                    artObjectPicture.setImageBitmap(flip(BitmapFactory.decodeResource(getResources(), R.drawable.mainpicture), Direction.VERTICAL));
+                    artObjectPicture.setImageBitmap(flip(BitmapFactory.decodeResource(getResources(), R.drawable.mainpicturesmall), Direction.VERTICAL));
                     direction = Direction.VERTICAL;
                 }
                 else
                 {
-                    artObjectPicture.setImageBitmap(flip(BitmapFactory.decodeResource(getResources(), R.drawable.mainpicture), Direction.HORIZONTAL));
+                    artObjectPicture.setImageBitmap(flip(BitmapFactory.decodeResource(getResources(), R.drawable.mainpicturesmall), Direction.HORIZONTAL));
                     direction = Direction.HORIZONTAL;
                 }
             }
@@ -85,10 +88,10 @@ MainActivity extends AppCompatActivity {
         });
 
         //shows dialog for visitor input
-        showInputDialog.setOnClickListener(new View.OnClickListener() {
+        showInputDialogButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showInputDialog.setVisibility(View.GONE);
+                showInputDialogButton.setImageResource(R.drawable.ic_comment_black_24dp);
                 final Dialog dialog = new Dialog(context);
 
                 //sets the view for the custom dialog

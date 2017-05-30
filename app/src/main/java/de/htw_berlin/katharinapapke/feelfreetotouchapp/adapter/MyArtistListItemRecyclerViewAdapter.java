@@ -51,7 +51,7 @@ public class MyArtistListItemRecyclerViewAdapter extends RecyclerView.Adapter<My
         Log.i(url, "onBindViewHolder: ");*/
 
         Context context = holder.artistObjectinList.getContext();
-        Picasso.with(context).load(R.drawable.mainpicture).placeholder(R.drawable.artist_picture)
+        Picasso.with(context).load(R.drawable.mainpicturesmall).placeholder(R.drawable.artist_picture)
                 .error(R.drawable.artist_picture).into(holder.artistObjectinList);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {

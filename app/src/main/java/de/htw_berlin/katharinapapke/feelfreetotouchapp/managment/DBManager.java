@@ -29,6 +29,7 @@ public class DBManager {
 
     public DBManager open() throws SQLException {
         database = dbHandler.getWritableDatabase();
+        //database.delete("comments", null, null);
         Log.d(LOG_TAG, "Datenbank-Referenz erhalten. Pfad zur Datenbank: " + database.getPath());
         return this;
     }

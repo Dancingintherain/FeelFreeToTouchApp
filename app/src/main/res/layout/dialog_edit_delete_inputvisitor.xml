@@ -25,12 +25,16 @@
 
     <Button
         android:id="@+id/deleteButton_edit_delete_dialog"
+        android:background="@android:color/black"
+        android:textColor="@color/colorAccent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Delete" />
 
     <Button
         android:id="@+id/editButton_edit_delete_dialog"
+        android:background="@android:color/black"
+        android:textColor="@color/colorAccent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Edit" />
