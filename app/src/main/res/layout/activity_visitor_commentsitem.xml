@@ -7,28 +7,27 @@
     android:weightSum="1"
     android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/commentsList_Id"
-        android:layout_width="40dp"
-        android:layout_height="114dp"
-        android:layout_marginLeft="8dp"
-        android:textStyle="bold"
-        android:paddingTop="8dp"
-        android:textAppearance="?attr/textAppearanceListItem"
-        android:textColor="@color/colorAccent" />
-
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/commentsList_Id"
+            android:layout_width="40dp"
+            android:layout_height="114dp"
+            android:layout_marginLeft="8dp"
+            android:paddingTop="8dp"
+            android:textAppearance="?attr/textAppearanceListItem"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold"
+            android:layout_above="@+id/commentsList_exhibitionComment" />
 
         <TextView
             android:id="@+id/commentsList_visitorcomment"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_weight="1"
-            android:layout_marginBottom="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="@id/commentsList_Id"
+            android:layout_toEndOf="@+id/commentsList_Id"
             android:textAppearance="?attr/textAppearanceListItem"
             android:textColor="@color/colorAccent"
             android:textStyle="italic"
@@ -38,14 +37,15 @@
         <TextView
             android:id="@+id/commentsList_exhibitionComment"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginRight="8dp"
-            android:layout_weight="1"
+            android:layout_height="50dp"
+            android:layout_below="@+id/commentsList_visitorcomment"
             android:textAppearance="?attr/textAppearanceListItem"
             android:textColor="@color/colorAccent"
             android:textStyle="italic"
             tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="81dp" />
-    </LinearLayout>
+            tools:layout_editor_absoluteY="81dp"
+            android:layout_toEndOf="@+id/commentsList_Id" />
+
+    </RelativeLayout>
 
 </LinearLayout>

@@ -43,6 +43,8 @@
         android:id="@+id/cancelButton_edit_delete_dialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:tint="@color/colorAccent"
+        android:background="@android:color/black"
         app:srcCompat="@android:drawable/btn_dialog" />
 
     <EditText

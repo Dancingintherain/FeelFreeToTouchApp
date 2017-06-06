@@ -101,6 +101,7 @@ MainActivity extends AppCompatActivity {
                 //set custom dialog components
                 ImageButton dismissDialogButton = (ImageButton) dialog.findViewById(R.id.dismissInputVisitorDialogButton);
                 Button addVisitorInputToListButton = (Button) dialog.findViewById(R.id.addVisitorInputToListButton);
+                Button goToVisitorInputListButton = (Button) dialog.findViewById(R.id.goToVisitorInputListButton);
                 final EditText visitorInput = (EditText) dialog.findViewById(R.id.inputVisitorText);
                 final EditText visitorInputExhibition= (EditText) dialog.findViewById(R.id.inputVisitorExhibition);
 
@@ -109,6 +110,17 @@ MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         dialog.dismiss();
+                    }
+                });
+
+                // if button is clicked, go to Visitor Input List
+                goToVisitorInputListButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(MainActivity.this, VisitorCommentsListActivity.class)
+                                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
+
                     }
                 });
 

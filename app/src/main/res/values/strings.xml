@@ -9,6 +9,8 @@
     <!-- Input Visitor Dialog-->
     <string name="tellArtistText">What Do You Think About the Object?</string>
     <string name="visitorInputExhibition">What Do You Think About The Exhibition?</string>
+    <string name="saveVisitorInputButton">Save your Comments</string>
+    <string name="goToVisitorInputListButton">See Comments List</string>
 
 
     <!-- Artist Info Activity-->

@@ -79,7 +79,7 @@ public class VisitorCommentsListActivity extends AppCompatActivity {
         Cursor cursor = dbManager.fetch();
         adapter = new SimpleCursorAdapter(this, R.layout.activity_visitor_commentsitem, cursor, from, to, 0);
         listView.setAdapter(adapter);
-        listView.setSelection(listView.getAdapter().getCount()-1);
+        //listView.setSelection(listView.getAdapter().getCount()-1);
 
         // OnCLickListener For List Items - open edit/delete custom dialog
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -162,15 +162,16 @@ public class VisitorCommentsListActivity extends AppCompatActivity {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        return true;
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
-    }
+    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
