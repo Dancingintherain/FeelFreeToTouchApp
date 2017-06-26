@@ -17,9 +17,20 @@ public class DBManager {
 
     private static final String LOG_TAG = DBHandler.class.getSimpleName();
 
+    private static DBManager sInstance = null;
+
     private DBHandler dbHandler;
     private Context context;
     private SQLiteDatabase database;
+
+    //Singleton
+    public static synchronized DBManager getInstance(Context context) {
+
+        if (sInstance == null) {
+            sInstance = new DBManager(context);
+        }
+        return sInstance;
+    }
 
     public DBManager(Context c) {
         context= c;

@@ -40,7 +40,7 @@ public class VisitorCommentsListActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         //create and opens database
-        dbManager = new DBManager(this);
+        dbManager = DBManager.getInstance(this);
         dbManager.open();
         //put visitor input into database if set
         putVisitorInputIntoDatabase();
@@ -82,96 +82,103 @@ public class VisitorCommentsListActivity extends AppCompatActivity {
         //listView.setSelection(listView.getAdapter().getCount()-1);
 
         // OnCLickListener For List Items - open edit/delete custom dialog
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+        runOnUiThread(new Runnable() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String name = parent.getItemAtPosition(position).toString();
-                Log.d(TAG, "onItemClick: You Clicked on " + name);
-
-                TextView idTextView = (TextView) view.findViewById(R.id.commentsList_Id);
-                TextView visitorCommentTextView = (TextView) view.findViewById(R.id.commentsList_visitorcomment);
-                TextView visitorCommentExhibitionTextView = (TextView) view.findViewById(R.id.commentsList_exhibitionComment);
-
-                String _id = idTextView.getText().toString();
-                String comment = visitorCommentTextView.getText().toString();
-                String visitorCommentExhibition = visitorCommentExhibitionTextView.getText().toString();
-
-                //Log.i(TAG, _id);
-                Log.i(TAG, comment);
-                Log.i(TAG, visitorCommentExhibition);
-
-                //sets custom dialog
-                final Dialog dialog = new Dialog(VisitorCommentsListActivity.this);
-
-                //sets the view for the custom dialog
-                dialog.setContentView(R.layout.dialog_edit_delete_inputvisitor);
-
-                //set custom dialog components
-                final EditText commentsEditField = (EditText) dialog.findViewById(R.id.comments_inputVisitor_edit_delete_dialog);
-                final EditText exhibitioncommentsEditField = (EditText) dialog.findViewById(R.id.exhibiton_comments_inputVisitor_edit_delete_dialog);
-                final EditText _idEditField = (EditText) dialog.findViewById(R.id.id_inputVisitor_edit_delete_dialog);
-                ImageButton cancelButton = (ImageButton) dialog.findViewById(R.id.cancelButton_edit_delete_dialog);
-                Button editButton = (Button) dialog.findViewById(R.id.editButton_edit_delete_dialog);
-                Button deleteButton = (Button) dialog.findViewById(R.id.deleteButton_edit_delete_dialog);
-
-                //sets visitor input text to edit text fields
-                commentsEditField.setText(comment);
-                exhibitioncommentsEditField.setText(visitorCommentExhibition);
-                _idEditField.setText(_id);
-
-                // if cancel button is clicked, go back to list view
-                cancelButton.setOnClickListener(new View.OnClickListener() {
+            public void run() {
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        String name = parent.getItemAtPosition(position).toString();
+                        Log.d(TAG, "onItemClick: You Clicked on " + name);
+
+                        TextView idTextView = (TextView) view.findViewById(R.id.commentsList_Id);
+                        TextView visitorCommentTextView = (TextView) view.findViewById(R.id.commentsList_visitorcomment);
+                        TextView visitorCommentExhibitionTextView = (TextView) view.findViewById(R.id.commentsList_exhibitionComment);
+
+                        String _id = idTextView.getText().toString();
+                        String comment = visitorCommentTextView.getText().toString();
+                        String visitorCommentExhibition = visitorCommentExhibitionTextView.getText().toString();
+
+                        //Log.i(TAG, _id);
+                        Log.i(TAG, comment);
+                        Log.i(TAG, visitorCommentExhibition);
+
+                        //sets custom dialog
+                        final Dialog dialog = new Dialog(VisitorCommentsListActivity.this);
+
+                        //sets the view for the custom dialog
+                        dialog.setContentView(R.layout.dialog_edit_delete_inputvisitor);
+
+                        //set custom dialog components
+                        final EditText commentsEditField = (EditText) dialog.findViewById(R.id.comments_inputVisitor_edit_delete_dialog);
+                        final EditText exhibitioncommentsEditField = (EditText) dialog.findViewById(R.id.exhibiton_comments_inputVisitor_edit_delete_dialog);
+                        final EditText _idEditField = (EditText) dialog.findViewById(R.id.id_inputVisitor_edit_delete_dialog);
+                        ImageButton cancelButton = (ImageButton) dialog.findViewById(R.id.cancelButton_edit_delete_dialog);
+                        Button editButton = (Button) dialog.findViewById(R.id.editButton_edit_delete_dialog);
+                        Button deleteButton = (Button) dialog.findViewById(R.id.deleteButton_edit_delete_dialog);
+
+                        //sets visitor input text to edit text fields
+                        commentsEditField.setText(comment);
+                        exhibitioncommentsEditField.setText(visitorCommentExhibition);
+                        _idEditField.setText(_id);
+
+                        // if cancel button is clicked, go back to list view
+                        cancelButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialog.dismiss();
+                            }
+                        });
+
+                        // if delete button is clicked, delete the entry from database
+                        deleteButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                int _id = Integer.parseInt(_idEditField.getText().toString());
+                                dbManager.delete(_id);
+                                adapter.changeCursor(dbManager.fetch());
+                                dialog.dismiss();
+                            }
+                        });
+
+                        // if editButton is clicked, edit the text and save into database
+                        editButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                String editComment = commentsEditField.getText().toString();
+                                String editExhbitionComment = exhibitioncommentsEditField.getText().toString();
+                                int _id = Integer.parseInt(_idEditField.getText().toString());
+
+                                Comments newEditedComment = new Comments(_id, editComment, editExhbitionComment);
+                                dbManager.update(newEditedComment);
+                                adapter.changeCursor(dbManager.fetch());
+                                dialog.dismiss();
+                            }
+                        });
+                        //opens dialog
+                        dialog.show();
                     }
                 });
 
-                // if delete button is clicked, delete the entry from database
-                deleteButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        int _id = Integer.parseInt(_idEditField.getText().toString());
-                        dbManager.delete(_id);
-                        adapter.notifyDataSetChanged();
-                        dialog.dismiss();
-                    }
-                });
-
-                // if editButton is clicked, edit the text and save into database
-                editButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        String editComment = commentsEditField.getText().toString();
-                        String editExhbitionComment = exhibitioncommentsEditField.getText().toString();
-                        int _id = Integer.parseInt(_idEditField.getText().toString());
-
-                        Comments newEditedComment = new Comments(_id, editComment, editExhbitionComment);
-                        dbManager.update(newEditedComment);
-                        adapter.notifyDataSetChanged();
-                        dialog.dismiss();
-                    }
-                });
-                //opens dialog
-                dialog.show();
-                adapter.notifyDataSetChanged();
             }
         });
+
     }
 
 
-    @Override
+    /*@Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return super.onCreateOptionsMenu(menu);
-    }
+    }*/
 
-    /*@Override
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
-    }*/
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

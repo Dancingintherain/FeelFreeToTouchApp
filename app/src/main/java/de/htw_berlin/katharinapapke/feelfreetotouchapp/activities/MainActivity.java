@@ -1,5 +1,8 @@
 package de.htw_berlin.katharinapapke.feelfreetotouchapp.activities;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +13,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,9 +32,13 @@ MainActivity extends AppCompatActivity {
     private ImageButton makeToastButton;
     private ImageButton flipPictureButton;
     private ImageButton showInputDialogButton;
-    private ImageButton flipToArtistPageButton;
+    private ImageButton startAnimationButton;
+    public View animatedLetters;
     private Direction direction = Direction.HORIZONTAL;
     final Context context = this;
+    //for animation
+    public static final long DEFAULT_ANIMATION_DURATION = 2500L;
+    protected float mScreenHeight;
 
     public static final String LOG_TAG = MainActivity.class.getSimpleName();
 
@@ -48,7 +56,7 @@ MainActivity extends AppCompatActivity {
         makeToastButton = (ImageButton) findViewById(R.id.imageButtonMain_makeToast);
         flipPictureButton = (ImageButton) findViewById(R.id.imageButtonMain_flipPicture);
         showInputDialogButton = (ImageButton) findViewById(R.id.imageButtonMain_makeComment);
-        flipToArtistPageButton =(ImageButton) findViewById(R.id.flipToNextPage);
+        startAnimationButton = (ImageButton) findViewById(R.id.imageButtonMain_startAnimation);
 
         //show Toast-Test when Button is pressed
         makeToastButton.setOnClickListener(new View.OnClickListener() {
@@ -59,31 +67,22 @@ MainActivity extends AppCompatActivity {
             }
         });
 
-        //flip to next page with artist infos
-        flipToArtistPageButton.setOnClickListener(new View.OnClickListener() {
+        //start Animation when Button is pressed
+        startAnimationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Intent intent = new Intent(MainActivity.this, ArtistInfoActivity.class);
-                startActivity(intent);
+                startAnimationButton.setImageResource(R.drawable.ic_play_circle_filled_black_36dp);
+                animatedLetters = findViewById(R.id.animated_letters);
+                onStartAnimation();
             }
         });
 
         //flip Picture when Button is pressed
-
         flipPictureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 flipPictureButton.setImageResource(R.drawable.ic_swap_vertical_circle_black_24dp);
-                if (direction == Direction.HORIZONTAL)
-                {
-                    artObjectPicture.setImageBitmap(flip(BitmapFactory.decodeResource(getResources(), R.drawable.mainpicturesmall), Direction.VERTICAL));
-                    direction = Direction.VERTICAL;
-                }
-                else
-                {
-                    artObjectPicture.setImageBitmap(flip(BitmapFactory.decodeResource(getResources(), R.drawable.mainpicturesmall), Direction.HORIZONTAL));
-                    direction = Direction.HORIZONTAL;
-                }
+                flipPicture();
             }
 
         });
@@ -93,76 +92,11 @@ MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 showInputDialogButton.setImageResource(R.drawable.ic_comment_black_24dp);
-                final Dialog dialog = new Dialog(context);
-
-                //sets the view for the custom dialog
-                dialog.setContentView(R.layout.dialog_inputvisitor);
-
-                //set custom dialog components
-                ImageButton dismissDialogButton = (ImageButton) dialog.findViewById(R.id.dismissInputVisitorDialogButton);
-                Button addVisitorInputToListButton = (Button) dialog.findViewById(R.id.addVisitorInputToListButton);
-                Button goToVisitorInputListButton = (Button) dialog.findViewById(R.id.goToVisitorInputListButton);
-                final EditText visitorInput = (EditText) dialog.findViewById(R.id.inputVisitorText);
-                final EditText visitorInputExhibition= (EditText) dialog.findViewById(R.id.inputVisitorExhibition);
-
-                // if button is clicked, close the custom dialog
-                dismissDialogButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                    }
-                });
-
-                // if button is clicked, go to Visitor Input List
-                goToVisitorInputListButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(MainActivity.this, VisitorCommentsListActivity.class)
-                                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(intent);
-
-                    }
-                });
-
-                // if button is clicked, show list with visitor comments
-                addVisitorInputToListButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(MainActivity.this, VisitorCommentsListActivity.class)
-                                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
-                        //get visitor comment
-                        String comment = visitorInput.getText().toString();
-                        //puts visitor comments into extra
-                        if (comment.length() != 0)
-                        {
-                            intent.putExtra("Comment", comment);
-                            visitorInput.setText("");
-
-                        } else
-                            {
-                               toastMessage("Please leave a comment here.");
-                            }
-
-                        String exhibition = visitorInputExhibition.getText().toString();
-                        if (exhibition.length() != 0)
-                        {
-                            intent.putExtra("Exhibition", exhibition);
-                            visitorInputExhibition.setText("");
-
-                        } else
-                        {
-                            toastMessage("Please leave a comment about the exhibition here.");
-                        }
-                        startActivity(intent);
-                    }
-                });
-
-                //opens dialog
-                dialog.show();
+                showVisitorInputDialog();
             }
         });
 
+        //shows info about app
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -185,10 +119,151 @@ MainActivity extends AppCompatActivity {
                 });
                 //opens dialog
                 dialog.show();
+            }
+        });
+    }
 
+    //Method for showing Visitor Input Dialog
+    private void showVisitorInputDialog() {
+        final Dialog dialog = new Dialog(context);
+
+        //sets the view for the custom dialog
+        dialog.setContentView(R.layout.dialog_inputvisitor);
+
+        //set custom dialog components
+        ImageButton dismissDialogButton = (ImageButton) dialog.findViewById(R.id.dismissInputVisitorDialogButton);
+        Button addVisitorInputToListButton = (Button) dialog.findViewById(R.id.addVisitorInputToListButton);
+        Button goToVisitorInputListButton = (Button) dialog.findViewById(R.id.goToVisitorInputListButton);
+        final EditText visitorInput = (EditText) dialog.findViewById(R.id.inputVisitorText);
+        final EditText visitorInputExhibition= (EditText) dialog.findViewById(R.id.inputVisitorExhibition);
+
+        // if button is clicked, close the custom dialog
+        dismissDialogButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        // if button is clicked, go to Visitor Input List
+        goToVisitorInputListButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, VisitorCommentsListActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
 
             }
         });
+
+        // if button is clicked, show list with visitor comments
+        addVisitorInputToListButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, VisitorCommentsListActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+                //get visitor comment
+                String comment = visitorInput.getText().toString();
+                //puts visitor comments into extra
+                if (comment.length() != 0)
+                {
+                    intent.putExtra("Comment", comment);
+                    visitorInput.setText("");
+
+                } else
+                {
+                    toastMessage("Please leave a comment here.");
+                }
+
+                String exhibition = visitorInputExhibition.getText().toString();
+                if (exhibition.length() != 0)
+                {
+                    intent.putExtra("Exhibition", exhibition);
+                    visitorInputExhibition.setText("");
+
+                } else
+                {
+                    toastMessage("Please leave a comment about the exhibition here.");
+                }
+                startActivity(intent);
+            }
+        });
+
+        //opens dialog
+        dialog.show();
+    }
+
+
+    //Method for flipping picture
+    private void flipPicture() {
+        if (direction == Direction.HORIZONTAL)
+        {
+            artObjectPicture.setImageBitmap(flip(BitmapFactory.decodeResource(getResources(), R.drawable.mainpicturesmall), Direction.VERTICAL));
+            direction = Direction.VERTICAL;
+        }
+        else
+        {
+            artObjectPicture.setImageBitmap(flip(BitmapFactory.decodeResource(getResources(), R.drawable.mainpicturesmall), Direction.HORIZONTAL));
+            direction = Direction.HORIZONTAL;
+        }
+    }
+
+   //helper method for flipping picture
+    public enum Direction { VERTICAL, HORIZONTAL };
+    public static Bitmap flip(Bitmap src, Direction type) {
+        Matrix matrix = new Matrix();
+
+        if(type == Direction.VERTICAL) {
+            matrix.preScale(1.0f, -1.0f);
+        }
+        else if(type == Direction.HORIZONTAL) {
+            matrix.preScale(-1.0f, 1.0f);
+        } else {
+            return src;
+        }
+        return Bitmap.createBitmap(src, 0, 0, src.getWidth(), src.getHeight(), matrix, true);
+    }
+
+
+   /* public void flip(){
+        Thread thread = new Thread(new Runnable(){
+            @Override
+            public void run(){
+                //code to do the HTTP request
+            }
+        });
+        thread.start();
+    }*/
+
+    protected void onStartAnimation(){
+
+        ValueAnimator positionAnimator = ValueAnimator.ofFloat(0, -mScreenHeight);
+        positionAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                float value = (float) animation.getAnimatedValue();
+                animatedLetters.setTranslationY(value);
+            }
+        });
+        ObjectAnimator rotationAnimator = ObjectAnimator.ofFloat(animatedLetters, "rotation", 0, 180f);
+        AnimatorSet animatorSet = new AnimatorSet();
+        animatorSet.play(positionAnimator).with(rotationAnimator);
+        animatorSet.setDuration(DEFAULT_ANIMATION_DURATION);
+        animatorSet.start();
+    }
+
+    private void toastMessage(String message){
+        Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        DisplayMetrics displaymetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+        mScreenHeight = displaymetrics.heightPixels;
     }
 
     @Override
@@ -218,53 +293,5 @@ MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
 
-    }
-
-   /* @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }*/
-
-    public enum Direction { VERTICAL, HORIZONTAL };
-
-    public void flip(){
-        Thread thread = new Thread(new Runnable(){
-            @Override
-            public void run(){
-                //code to do the HTTP request
-            }
-        });
-        thread.start();
-
-    }
-
-
-
-    public static Bitmap flip(Bitmap src, Direction type) {
-        Matrix matrix = new Matrix();
-
-        if(type == Direction.VERTICAL) {
-            matrix.preScale(1.0f, -1.0f);
-        }
-        else if(type == Direction.HORIZONTAL) {
-            matrix.preScale(-1.0f, 1.0f);
-        } else {
-            return src;
-        }
-        return Bitmap.createBitmap(src, 0, 0, src.getWidth(), src.getHeight(), matrix, true);
-    }
-
-    private void toastMessage(String message){
-        Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
     }
 }

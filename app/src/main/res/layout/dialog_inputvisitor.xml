@@ -35,7 +35,10 @@
             android:id="@+id/inputVisitorText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:inputType="textMultiLine"
+            android:textColor="@color/colorAccent"
+            android:inputType="textCapSentences|textMultiLine"
+            android:maxLength="2000"
+            android:maxLines="4"
             android:textSize="16sp" />
 
     </android.support.design.widget.TextInputLayout>
@@ -59,9 +62,11 @@
         <EditText
             android:id="@+id/inputVisitorExhibition"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:ems="10"
-            android:inputType="text|textMultiLine"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorAccent"
+            android:inputType="textCapSentences|textMultiLine"
+            android:maxLength="2000"
+            android:maxLines="4"
             android:textSize="16sp" />
 
     </android.support.design.widget.TextInputLayout>

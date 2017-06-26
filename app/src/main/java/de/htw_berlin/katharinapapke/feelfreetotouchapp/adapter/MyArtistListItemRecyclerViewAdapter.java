@@ -1,14 +1,11 @@
 package de.htw_berlin.katharinapapke.feelfreetotouchapp.adapter;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -44,15 +41,15 @@ public class MyArtistListItemRecyclerViewAdapter extends RecyclerView.Adapter<My
         // ID und Texte werden gesetzt
         holder.mIdView.setText(mValues.get(position).id);
         holder.artistText.setText(mValues.get(position).content);
-        //holder.artistObjectinList.setImageResource(R.drawable.list_picture);
+        holder.artistObjectinList.setImageResource(mValues.get(position).details);
 
         //Pictures from Server/Web would be loaded - now only drawables will be loaded
         /*String url = holder.mItem.details;
         Log.i(url, "onBindViewHolder: ");*/
 
-        Context context = holder.artistObjectinList.getContext();
+        /*Context context = holder.artistObjectinList.getContext();
         Picasso.with(context).load(R.drawable.list_picture).placeholder(R.drawable.artist_picture)
-                .error(R.drawable.artist_picture).fit().into(holder.artistObjectinList);
+                .error(R.drawable.artist_picture).fit().into(holder.artistObjectinList);*/
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import de.htw_berlin.katharinapapke.feelfreetotouchapp.fragments.ArtistListItemFragment;
 import de.htw_berlin.katharinapapke.feelfreetotouchapp.R;
@@ -66,6 +67,11 @@ public class ArtistListActivity extends AppCompatActivity implements ArtistListI
 
     @Override
     public void onListFragmentInteraction(DummyContent.ArtistListItem item) {
-
+        String tsp  = item.id.toString();
+        Toast.makeText(this, tsp, Toast.LENGTH_SHORT).show();
+        /*Intent intent = new Intent(this, SecondActivity.class);
+        intent.putExtra(EXTRA_MESSAGE, item.details);
+        startActivity(intent);
+*/
     }
 }

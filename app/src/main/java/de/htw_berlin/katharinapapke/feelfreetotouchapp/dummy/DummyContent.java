@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import de.htw_berlin.katharinapapke.feelfreetotouchapp.R;
+
 /**
  * Helper class for providing sample content for user interfaces created by
  * Android template wizards.
@@ -25,8 +27,13 @@ public class DummyContent {
      * An array of sample Artist Names.
      */
     public static final List<String> ARTIST_NAMES = new ArrayList<>();
+    /**
+     * An array of sample Artist Pictures.
+     */
+    public static final List<Integer> ARTIST_PICTURES = new ArrayList<>();
 
     private static final int COUNT = 5;
+
 
     static {
         // Add some sample items.
@@ -46,16 +53,20 @@ public class DummyContent {
         ARTIST_NAMES.add("Anna Kcornikow - Museum of Modern Art New York");
         ARTIST_NAMES.add("Malia Hi - Biennale 2009");
         ARTIST_NAMES.add("Chang Che Tsyvo - Biennale 2009");
-        ARTIST_NAMES.add("Mirko Rausch - Biennale 2009");}
+        ARTIST_NAMES.add("Mirko Rausch - Art Center Miami 2001");}
+
+    private static void createListofPictures(){
+        ARTIST_PICTURES.add(R.drawable.artistpic1);
+        ARTIST_PICTURES.add(R.drawable.artistpic2);
+        ARTIST_PICTURES.add(R.drawable.artistpic3);
+        ARTIST_PICTURES.add(R.drawable.artistpic1);
+        ARTIST_PICTURES.add(R.drawable.artistpic2);
+    }
 
     private static ArtistListItem createArtistListItem(int position) {
         createListofArtists();
-        return new ArtistListItem(String.valueOf(position), position + ". " + ARTIST_NAMES.get(position), getPicturePath());
-    }
-
-    public static String getPicturePath (){
-        String filepath = "/Users/Berlina/AndroidStudioProjects/FeelFreeToTouchApp/app/src/main/res/drawable/artist_picture.jpg";
-        return filepath;
+        createListofPictures();
+        return new ArtistListItem(String.valueOf(position), position + ". " + ARTIST_NAMES.get(position), ARTIST_PICTURES.get(position) );
     }
 
     //For getting Pictures from the an URL
@@ -77,9 +88,9 @@ public class DummyContent {
     public static class ArtistListItem {
         public final String id;
         public final String content;
-        public final String details;
+        public final Integer details;
 
-        public ArtistListItem(String id, String content, String details) {
+        public ArtistListItem(String id, String content, Integer details) {
             this.id = id;
             this.content = content;
             this.details = details;
