@@ -236,6 +236,7 @@ MainActivity extends AppCompatActivity {
         thread.start();
     }*/
 
+    //method for start animation
     protected void onStartAnimation(){
 
         ValueAnimator positionAnimator = ValueAnimator.ofFloat(0, -mScreenHeight);

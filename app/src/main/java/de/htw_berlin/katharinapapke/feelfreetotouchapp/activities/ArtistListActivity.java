@@ -33,7 +33,9 @@ public class ArtistListActivity extends AppCompatActivity implements ArtistListI
             }
         });
         //sets back-icon next to toolbar title
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if(getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
     }
 
     @Override
@@ -67,8 +69,7 @@ public class ArtistListActivity extends AppCompatActivity implements ArtistListI
 
     @Override
     public void onListFragmentInteraction(DummyContent.ArtistListItem item) {
-        String tsp  = item.id.toString();
-        Toast.makeText(this, tsp, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, item.id, Toast.LENGTH_SHORT).show();
         /*Intent intent = new Intent(this, SecondActivity.class);
         intent.putExtra(EXTRA_MESSAGE, item.details);
         startActivity(intent);

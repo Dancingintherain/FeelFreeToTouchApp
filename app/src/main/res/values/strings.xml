@@ -27,6 +27,6 @@
 
 
     <!-- Visitor Comments List Activity-->
-    <string name="empty_list_text">No comments from visitors so far.</string>
+    <string name="empty_list_text">Do you see this empty space? It is very lonely. It wants you to leave a comment here. </string>
     <string name="visitor_comments_list_headline">Comments from Visitors</string>
 </resources>

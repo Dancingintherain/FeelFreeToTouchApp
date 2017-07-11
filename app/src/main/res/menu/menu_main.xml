@@ -10,15 +10,13 @@
         android:layout_width="wrap_content"
         android:icon="@drawable/ic_recent_actors_black_24dp"
         android:title="Show List of Artists"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
 
     <!-- Go To Artist List -->
     <item
         android:id="@+id/action_artistInfo"
         android:icon="@drawable/ic_person_black_24dp"
         android:title="About the Artist"
-        app:showAsAction="always"
+        app:showAsAction="ifRoom"
         />
-    />
-
 </menu>

@@ -36,7 +36,9 @@ public class ArtistInfoActivity extends AppCompatActivity {
             }
         });
         //sets Back-Icon next to Toolbar Title
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if(getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
     }
 
     @Override
