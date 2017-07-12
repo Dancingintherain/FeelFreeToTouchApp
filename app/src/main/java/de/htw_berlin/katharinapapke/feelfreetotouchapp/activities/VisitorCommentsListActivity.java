@@ -170,11 +170,13 @@ public class VisitorCommentsListActivity extends AppCompatActivity {
     }
 
 
-    /*@Override
+    @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return super.onCreateOptionsMenu(menu);
-    }*/
+        //sets MenuItem artistList invisible
+        MenuItem actionArtistList = menu.findItem(R.id.action_artistList);
+        actionArtistList.setVisible(true);
+        return true;
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
