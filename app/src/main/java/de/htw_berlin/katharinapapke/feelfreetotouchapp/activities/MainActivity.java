@@ -58,6 +58,7 @@ MainActivity extends AppCompatActivity {
         showInputDialogButton = (ImageButton) findViewById(R.id.imageButtonMain_makeComment);
         startAnimationButton = (ImageButton) findViewById(R.id.imageButtonMain_startAnimation);
 
+
         //show Toast-Test when Button is pressed
         makeToastButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,6 +74,7 @@ MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 startAnimationButton.setImageResource(R.drawable.ic_play_circle_filled_black_36dp);
                 animatedLetters = findViewById(R.id.animated_letters);
+                animatedLetters.setVisibility(View.VISIBLE);
                 onStartAnimation();
             }
         });
@@ -239,7 +241,9 @@ MainActivity extends AppCompatActivity {
     //method for start animation
     protected void onStartAnimation(){
 
+        //Create a new ValueAnimator
         ValueAnimator positionAnimator = ValueAnimator.ofFloat(0, -mScreenHeight);
+        //Attach an AnimatorUdpateListener to the ValueAnimator that updates the animatedLetters position
         positionAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
@@ -247,9 +251,13 @@ MainActivity extends AppCompatActivity {
                 animatedLetters.setTranslationY(value);
             }
         });
+        //Create an ObjectAnimator, a second animator that updates the animatedLetters’s rotation
         ObjectAnimator rotationAnimator = ObjectAnimator.ofFloat(animatedLetters, "rotation", 0, 180f);
+        //Create a new instance of AnimatorSet
         AnimatorSet animatorSet = new AnimatorSet();
+        //Specify that you’d like to execute positionAnimator together with rotationAnimator
         animatorSet.play(positionAnimator).with(rotationAnimator);
+        //Just as with a typical animator, you set a duration and call start().
         animatorSet.setDuration(DEFAULT_ANIMATION_DURATION);
         animatorSet.start();
     }
@@ -258,6 +266,7 @@ MainActivity extends AppCompatActivity {
         Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
     }
 
+    //get ScreenHeight for animation in onResume() method
     @Override
     protected void onResume() {
         super.onResume();
