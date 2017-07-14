@@ -1,6 +1,7 @@
 package de.htw_berlin.katharinapapke.feelfreetotouchapp.activities;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -31,8 +32,21 @@ public class ArtistInfoActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "This will be a link to the recent exhibition/Audiotape starts", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                //create a new MediaPlayer
+                final MediaPlayer song= MediaPlayer.create(ArtistInfoActivity.this,R.raw.aintthatakickintheheadwithraylowe);
+                //starts the audio file with infos from the artist
+                song.start();
+                //creates new Snackbar
+                Snackbar bar = Snackbar.make(view, "Listen what the artist has to say.", Snackbar.LENGTH_INDEFINITE)
+                        //creates action which will stop the audio file
+                        .setAction("Stop Tape", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                song.stop();
+                            }
+                        })
+                        ;
+                bar.show();
             }
         });
         //sets Back-Icon next to Toolbar Title
@@ -65,6 +79,10 @@ public class ArtistInfoActivity extends AppCompatActivity {
             case R.id.action_artistList:;
                 Intent intent = new Intent(ArtistInfoActivity.this, ArtistListActivity.class);
                 startActivity(intent);
+                return true;
+            case android.R.id.home:
+                onBackPressed();
+                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
