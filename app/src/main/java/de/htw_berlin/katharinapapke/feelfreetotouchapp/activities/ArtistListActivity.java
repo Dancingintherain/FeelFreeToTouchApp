@@ -1,7 +1,9 @@
 package de.htw_berlin.katharinapapke.feelfreetotouchapp.activities;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -11,11 +13,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import de.htw_berlin.katharinapapke.feelfreetotouchapp.fragments.ArtistListItemFragment;
 import de.htw_berlin.katharinapapke.feelfreetotouchapp.R;
 import de.htw_berlin.katharinapapke.feelfreetotouchapp.dummy.DummyContent;
+import de.htw_berlin.katharinapapke.feelfreetotouchapp.fragments.ArtistListItemFragment;
 
 public class ArtistListActivity extends AppCompatActivity implements ArtistListItemFragment.OnListFragmentInteractionListener {
+
+    static final int REQUEST_IMAGE_CAPTURE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,13 +32,33 @@ public class ArtistListActivity extends AppCompatActivity implements ArtistListI
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "This will be a link to the recent exhibition/Camera starts", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                //creates a PackageManager
+                PackageManager pm = getApplicationContext().getPackageManager();
+                //checks, if the device has a camera
+                if (pm.hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
+                    //opens camera via delegating camera action to a camera application
+                    dispatchTakePictureIntent();
+                    //shows snackbar
+                    Snackbar.make(view, "Take your own picture of the object", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }
+                else{
+                    Snackbar.make(view, "You can ask the museum staff for more information.", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }
+
             }
         });
         //sets back-icon next to toolbar title
         if(getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+    }
+
+    public void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
         }
     }
 
@@ -57,11 +81,12 @@ public class ArtistListActivity extends AppCompatActivity implements ArtistListI
         // Handle action bar item clicks here.
         switch(item.getItemId()) {
 
-            //If icon artistInfo get clicked the artistInfo activity starts
+            //If icon artistInfo gets clicked the artistInfo activity starts
             case R.id.action_artistInfo:;
                 Intent intent = new Intent(ArtistListActivity.this, ArtistInfoActivity.class);
                 startActivity(intent);
                 return true;
+            //If back icon gets clicked
             case android.R.id.home:
                 onBackPressed();
                 return true;
