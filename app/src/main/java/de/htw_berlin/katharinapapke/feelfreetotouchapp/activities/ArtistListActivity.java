@@ -55,6 +55,7 @@ public class ArtistListActivity extends AppCompatActivity implements ArtistListI
         }
     }
 
+    //method to open camera application on device
     public void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
@@ -89,6 +90,7 @@ public class ArtistListActivity extends AppCompatActivity implements ArtistListI
             //If back icon gets clicked
             case android.R.id.home:
                 onBackPressed();
+                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
