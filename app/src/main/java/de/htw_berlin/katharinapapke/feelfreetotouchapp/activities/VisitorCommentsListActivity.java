@@ -36,11 +36,6 @@ public class VisitorCommentsListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.menutoolbar);
-        setSupportActionBar(toolbar);
-        if(getSupportActionBar() != null){
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
 
         //create and opens database
         dbManager = DBManager.getInstance(this);
@@ -49,6 +44,11 @@ public class VisitorCommentsListActivity extends AppCompatActivity {
         putVisitorInputIntoDatabase();
         //sets view
         setContentView(R.layout.activity_visitor_comments_list);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.menutoolbar);
+        setSupportActionBar(toolbar);
+        if(getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
         listView = (ListView) findViewById(R.id.visitor_comments_list_view);
         populateListView();
     }
@@ -182,6 +182,7 @@ public class VisitorCommentsListActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        Log.i("onCreate", "menu");
         return true;
     }
 
@@ -192,14 +193,18 @@ public class VisitorCommentsListActivity extends AppCompatActivity {
 
             //if icon artistList get clicked the artistList Activity starts
             case R.id.action_artistList:;
-                Intent intent = new Intent(VisitorCommentsListActivity.this, MainActivity.class);
+                Intent intent = new Intent(VisitorCommentsListActivity.this, ArtistListActivity.class);
                 startActivity(intent);
                 return true;
-
             //If icon artistInfo get clicked the artistInfo activity starts
             case R.id.action_artistInfo:;
-                Intent artistInfoIntent = new Intent(VisitorCommentsListActivity.this, MainActivity.class);
+                Intent artistInfoIntent = new Intent(VisitorCommentsListActivity.this, ArtistInfoActivity.class);
                 startActivity(artistInfoIntent);
+                return true;
+            //If icon back get clicked main activity starts
+            case android.R.id.home:
+                onBackPressed();
+                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

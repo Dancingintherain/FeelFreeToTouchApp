@@ -7,10 +7,7 @@
     android:orientation="vertical"
     tools:context="de.htw_berlin.katharinapapke.feelfreetotouchapp.activities.VisitorCommentsListActivity">
 
-    <include layout="@layout/toolbar"
-        android:id="@+id/include"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent" />
+    <include layout="@layout/toolbar" />
 
     <TextView
         android:id="@+id/visitor_comments_headline"

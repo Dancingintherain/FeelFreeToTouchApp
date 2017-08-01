@@ -29,4 +29,9 @@
     <!-- Visitor Comments List Activity-->
     <string name="empty_list_text">Do you see this empty space? It is very lonely. It wants you to leave a comment here. </string>
     <string name="visitor_comments_list_headline">Comments from Visitors</string>
+
+    <!-- Menu -->
+    <string name="about">About the Artist</string>
+    <string name="list">Show List of Artists</string>
+
 </resources>
