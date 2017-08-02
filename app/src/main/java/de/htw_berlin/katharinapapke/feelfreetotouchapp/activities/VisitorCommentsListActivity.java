@@ -195,16 +195,21 @@ public class VisitorCommentsListActivity extends AppCompatActivity {
             case R.id.action_artistList:;
                 Intent intent = new Intent(VisitorCommentsListActivity.this, ArtistListActivity.class);
                 startActivity(intent);
+                //finish();
                 return true;
             //If icon artistInfo get clicked the artistInfo activity starts
             case R.id.action_artistInfo:;
                 Intent artistInfoIntent = new Intent(VisitorCommentsListActivity.this, ArtistInfoActivity.class);
                 startActivity(artistInfoIntent);
+                //finish();
                 return true;
             //If icon back get clicked main activity starts
             case android.R.id.home:
-                onBackPressed();
-                finish();
+                Intent intent2 = new Intent(VisitorCommentsListActivity.this, MainActivity.class);
+                startActivity(intent2);
+                //finish();
+                /*onBackPressed();
+                finish();*/
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

@@ -86,11 +86,16 @@ public class ArtistListActivity extends AppCompatActivity implements ArtistListI
             case R.id.action_artistInfo:;
                 Intent intent = new Intent(ArtistListActivity.this, ArtistInfoActivity.class);
                 startActivity(intent);
+                //finish();
                 return true;
             //If back icon gets clicked
             case android.R.id.home:
-                onBackPressed();
-                finish();
+                Intent intent2 = new Intent(ArtistListActivity.this, MainActivity.class);
+                intent2.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent2);
+                //finish();
+            /*    onBackPressed();
+                finish();*/
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

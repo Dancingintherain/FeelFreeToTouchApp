@@ -290,14 +290,16 @@ MainActivity extends AppCompatActivity {
 
             //if icon artistList get clicked the artistList Activity starts
             case R.id.action_artistList:;
+                Intent mainIntent = getIntent().setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 Intent intent = new Intent(MainActivity.this, ArtistListActivity.class);
                 startActivity(intent);
+                //finish();
                 return true;
-
             //if icon artistInfo get clicked the artistInfo Activity starts
             case R.id.action_artistInfo:;
                 Intent intent2 = new Intent(MainActivity.this, ArtistInfoActivity.class);
                 startActivity(intent2);
+                //finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
